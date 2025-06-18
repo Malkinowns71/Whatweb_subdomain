@@ -1,5 +1,3 @@
-#!/usr/bin/python3 
-
 import subprocess
 import requests
 from selenium import webdriver
