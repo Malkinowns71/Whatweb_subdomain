@@ -34,7 +34,7 @@ def process_urls_from(file_path, html_report):
                         report.write(f"<pre>{whatweb_output}</pre>")
                         if screenshot_filename and os.path.exists(screenshot_filename):
                             rel_path = os.path.relpath(screenshot_filename, os.path.dirname(html_report_path))
-                            report.write(f'<img src="{rel_path}" width="600"><br>')
+                            report.write(f'<img src="file://{screenshot_filename}" width="600"><br>')
                         else:
                             report.write("<p>No screenshot available.</p>")
             except FileNotFoundError:
