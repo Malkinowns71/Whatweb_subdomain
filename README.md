@@ -1,61 +1,53 @@
-Automated Web Reconnaissance & Visual Triage Framework
+# ReconDash 🚀
+**Automated Web Reconnaissance & Visual Triage Framework**
 
-📖 Overview
-Whatweb_subdomain is a Python-based automation framework designed to streamline the reconnaissance phase of penetration tests. Unlike standard enumeration tools that provide raw text output, this utility performs Visual Triage—capturing high-fidelity screenshots using a headless Chrome instance while concurrently fingerprinting technologies and HTTP response metadata.
+[![Python 3.x](https://img.shields.io/badge/python-3.x-blue.svg)](https://www.python.org/)
+[![Selenium](https://img.shields.io/badge/Engine-Selenium-green.svg)](https://www.selenium.dev/)
+[![WhatWeb](https://img.shields.io/badge/Recon-WhatWeb-red.svg)](https://github.com/urbanadventurer/WhatWeb)
 
-This tool is purpose-built for Red Teamers who need to quickly sift through hundreds of subdomains to identify high-value targets (e.g., login portals, unauthenticated dashboards, or deprecated internal systems).
+## 📖 Overview
+**ReconDash** is a specialized offensive security utility designed to eliminate the bottleneck between automated subdomain enumeration and manual target verification. 
 
-✨ Key Features
-Headless Browser Integration: Uses Selenium and Chrome to render pages exactly as a user would, capturing JavaScript-heavy content that basic requests miss.
+While traditional tools provide text-heavy outputs, ReconDash performs **Visual Triage**. It leverages a headless Chrome engine to render pages and capture high-fidelity snapshots while simultaneously fingerprinting the technology stack using `WhatWeb`. The result is a single, portable HTML dashboard that allows Red Teamers to identify high-value targets (login portals, misconfigured dashboards, etc.) in seconds.
 
-Unified Recon Report: Generates a standalone HTML dashboard containing:
+## ✨ Key Features
+* **Headless Browser Rendering:** Uses Selenium to render modern JavaScript-heavy sites that basic `requests`-based tools often miss.
+* **Technology Fingerprinting:** Deep-dive analysis via `WhatWeb` integration for server, CMS, and framework identification.
+* **Consolidated Intelligence:** Maps HTTP response status codes, technology headers, and visual snapshots into one UI.
+* **Engineered for Performance:** Implements a persistent browser session to minimize CPU/Memory overhead during large-scale scans.
+* **Portable Output:** Generated reports use relative pathing, making them ideal for zipping and sharing as part of a penetration testing deliverable.
 
-HTTP Status Codes & Reasons (e.g., 200 OK, 403 Forbidden).
+## 🛠️ System Architecture
+ReconDash is built with a focus on modularity and error resiliency:
+1. **Orchestrator:** Manages the input stream and directory structure.
+2. **Recon Engine:** Executes `WhatWeb` subprocesses for header analysis.
+3. **Capture Engine:** Utilizes a persistent Selenium WebDriver to navigate and snapshot targets.
+4. **Reporter:** Compiles raw JSON/Text data into a sanitized, responsive HTML report.
 
-Technology Fingerprinting: Deep-dive analysis via WhatWeb integration.
+## 🚀 Installation
 
-Visual Snapshots: 1200x800 high-resolution screenshots.
+### 1. Prerequisites
+* **Python 3.x**
+* **WhatWeb:** `sudo apt install whatweb`
+* **Chrome & ChromeDriver:** Ensure Google Chrome and the matching `chromedriver` are installed in your PATH.
 
-Session Optimization: Initializes a single browser instance for the entire scan to minimize memory overhead and CPU usage.
-
-Portable Reporting: Uses relative pathing for image assets, making the output folder easy to compress and share with stakeholders.
-
-🛠️ Technical Workflow
-Ingestion: Reads a list of target URLs from a flat file.
-
-Validation: Performs a synchronous requests check to verify connectivity and capture status codes.
-
-Fingerprinting: Triggers WhatWeb as a subprocess to extract server headers and CMS details.
-
-Capture: Directs the Selenium headless driver to the target for a visual snapshot.
-
-Reporting: Appends data into a formatted HTML document with a clean UI.
-
-🚀 Installation
-1. Prerequisites
-Python 3.x
-
-WhatWeb: sudo apt install whatweb
-
-Chrome & ChromeDriver: Ensure Google Chrome and the matching chromedriver are installed.
-
-2. Python Dependencies
-Bash
+### 2. Dependencies
+```bash
 pip install selenium requests
 3. Setup
 Bash
-git clone https://github.com/Malkinowns71/Whatweb_subdomain.git
-cd Whatweb_subdomain
+git clone [https://github.com/Malkinowns71/ReconDash.git](https://github.com/Malkinowns71/ReconDash.git)
+cd ReconDash
 📋 Usage
-Create a file (e.g., targets.txt) with one URL per line (ensure http:// or https:// is included).
+Prepare a targets.txt file with one URL per line (including http:// or https://).
 
-Execute the script:
+Run the framework:
 
 Bash
-python3 whatweb_subdomain.py
-When prompted, enter the filename: targets.txt.
+python3 recondash.py
+Follow the prompt to enter your target filename.
 
-Open recon_report.html in any browser to review results.
+Open recon_report.html to view your findings.
 
 🛡️ Legal Disclaimer
 This tool is intended for authorized security testing and educational purposes only. The author assumes no liability for misuse of this tool. Always ensure you have explicit written permission before scanning any infrastructure.
