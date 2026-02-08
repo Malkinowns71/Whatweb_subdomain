@@ -48,6 +48,7 @@ python3 recondash.py
 Follow the prompt to enter your target filename.
 
 Open recon_report.html to view your findings.
-
+```
 🛡️ Legal Disclaimer
 This tool is intended for authorized security testing and educational purposes only. The author assumes no liability for misuse of this tool. Always ensure you have explicit written permission before scanning any infrastructure.
+
